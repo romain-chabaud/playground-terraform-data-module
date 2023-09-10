@@ -8,7 +8,7 @@ variable "database_configuration" {
     database_name = string
     user_name     = string
     password_generation = object({
-      desired_password_length = optional(number)
+      desired_password_length = number
       min_password_length     = optional(number, 8)
     })
   })

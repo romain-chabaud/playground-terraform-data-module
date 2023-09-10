@@ -16,7 +16,7 @@ variable "database_configuration" {
     database_name = optional(string)
     user_name     = optional(string)
     password_generation = optional(object({
-      desired_password_length = optional(number)
+      desired_password_length = number
       min_password_length     = optional(number)
       })
     )
