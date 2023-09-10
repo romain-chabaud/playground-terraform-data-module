@@ -1,3 +1,7 @@
+resource "google_project_service" "secret_manager_enabler" {
+  service = "secretmanager.googleapis.com"
+}
+
 resource "google_secret_manager_secret" "secret" {
   secret_id = var.secret_configuration.name
   replication {
@@ -7,6 +11,8 @@ resource "google_secret_manager_secret" "secret" {
       }
     }
   }
+
+  depends_on = [google_project_service.secret_manager_enabler]
 }
 
 resource "google_secret_manager_secret_version" "secret_value" {
