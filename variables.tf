@@ -23,8 +23,3 @@ variable "database_configuration" {
     )
   })
 }
-
-variable "secret_name" {
-  type     = string
-  nullable = true
-}

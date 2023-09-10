@@ -18,7 +18,7 @@ module "data_provisioning" {
 module "secret_provisioning" {
   source = "./modules/secret"
   secret_configuration = {
-    name     = var.secret_name ? var.secret_name : "${var.app_name}_database_configuration_secret"
+    name     = "${var.app_name}_database_configuration_secret"
     location = var.app_region
     value    = jsonencode(module.data_provisioning.database_configuration)
   }
