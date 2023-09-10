@@ -1,4 +1,4 @@
-resource "google_secret_manager_secret" "database_configuration_secret" {
+resource "google_secret_manager_secret" "secret" {
   secret_id = var.secret_configuration.name
   replication {
     user_managed {
@@ -9,11 +9,11 @@ resource "google_secret_manager_secret" "database_configuration_secret" {
   }
 }
 
-resource "google_secret_manager_secret_version" "database_configuration_secret_value" {
-  secret      = google_secret_manager_secret.database_configuration_secret.name
-  secret_data = jsonencode(var.secret_configuration.values)
+resource "google_secret_manager_secret_version" "secret_value" {
+  secret      = google_secret_manager_secret.secret.name
+  secret_data = var.secret_configuration.value
 }
 
 data "google_secret_manager_secret_version_access" "secret_version_access" {
-  secret = google_secret_manager_secret_version.database_configuration_secret_value.secret
+  secret = google_secret_manager_secret_version.secret_value.secret
 }

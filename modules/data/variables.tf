@@ -1,18 +1,15 @@
 variable "database_configuration" {
   type = object({
-    instance = string
-    name     = string
-    username = string
+    instance = object({
+      name                = string
+      exists              = bool
+      authorized_networks = optional(string, "0.0.0.0/0")
+    })
+    database_name = string
+    user_name     = string
+    password_generation = object({
+      desired_password_length = optional(number)
+      min_password_length     = optional(number, 8)
+    })
   })
-  sensitive = true
-  nullable  = false
-}
-
-variable "desired_password_length" {
-  type = number
-}
-
-variable "min_password_length" {
-  type    = number
-  default = 8
 }

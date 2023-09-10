@@ -2,8 +2,6 @@ variable "secret_configuration" {
   type = object({
     name     = string
     location = string
-    values    = map(string)
+    value    = string
   })
-  sensitive = true
-  nullable  = false
 }
