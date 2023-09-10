@@ -6,12 +6,12 @@ module "data_provisioning" {
       exists              = var.database_configuration.instance.exists
       authorized_networks = var.database_configuration.instance.authorized_networks
     }
-    database_name = var.database_configuration.database_name ? var.database_configuration.database_name : "${var.app_name}_database"
-    user_name     = var.database_configuration.user_name ? var.database_configuration.user_name : "${var.app_name}_database_user"
-    password_generation = {
+    database_name = var.database_configuration.database_name != null ? var.database_configuration.database_name : "${var.app_name}_database"
+    user_name     = var.database_configuration.user_name != null ? var.database_configuration.user_name : "${var.app_name}_database_user"
+    password_generation = var.database_configuration.password_generation != null ? {
       desired_password_length = var.database_configuration.password_generation.desired_password_length
       min_password_length     = var.database_configuration.password_generation.min_password_length
-    }
+    } : {}
   }
 }
 
